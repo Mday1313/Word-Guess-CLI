@@ -5,9 +5,12 @@ var Letter = function (input) {
 
     this.toString = function () {
         // console.log("I WORK");
-        if (this.letter === "") {
+        if (this.letter === " ") {
             this.hasBeenGuessed = true;
-            return "";
+            return " ";
+        } else if (this.letter === "'") {
+            this.hasBeenGuessed = true;
+            return "'";
         } else if (this.hasBeenGuessed === false) {
             return "_";
         } else {
@@ -22,10 +25,10 @@ var Letter = function (input) {
     }
 }
 
-var input = "s";
-var test = new Letter("r")
+// var input = "s";
+// var test = new Letter("r")
 
-var result = test.toString();
-console.log(result);
+// var result = test.determineInWord();
+// console.log(result);
 
 module.exports = Letter;

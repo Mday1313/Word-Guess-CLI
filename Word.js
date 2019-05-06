@@ -1,31 +1,38 @@
-var letter = require("./Letter.js");
-var input = "t";
-var gameWord = "";
-var Word = function(answer){
-    this.wordArr = answer.split("");
-    this.newLetter = new letter(input);
-    this.letterArr = [];
-    this.letterArr.push(this.newLetter.letter);
+var Letter = require("./Letter.js");
 
-    this.displayWord = function() {
-    this.wordArr.forEach(element => {
-        gameWord = myWord.toString(element)
-        console.log(gameWord);
-        
-    });
+
+var Word = function (answer) {
+    this.gameWord = [];
+
+    for (var i = 0; i < answer.length; i++) {
+        var newLetter = new Letter(answer[i]);
+        this.gameWord.push(newLetter);
+    }
+
+    this.displayWord = function () {
+        var display = "";
+        for (var i = 0; i < this.gameWord.length; i++) {
+            display += this.gameWord[i] + " ";
+        }
+        console.log();
+        console.log(display);
+    };
+
+    // this.guessWord = function (input) {
+    //     for (var i = 0; i < this.gameWord.length; i++) {
+    //         this.gameWord.determineInWord(input);
+    //         console.log(input + " is in word.");
+    //     }
+
+    // };
+
+
 }
-    // this.printWord = function(){
-    //     this.wordArr.forEach(element => {
-           
-    //     });
-    // }
-    
-  
-}
 
 
-let myWord = new Word("stars");
-var result = myWord.toString();
+module.exports = Word;
 
-console.log(gameWord);
-console.log(result);
+// let myWord = new Word("stars");
+// var result = myWord.guessWord("s");
+
+

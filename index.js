@@ -1,7 +1,10 @@
 // Dependency for inquirer npm package
 var inquirer = require("inquirer");
+// link Word constructor
+var Word = require("./Word");
 // -create an array with words to guess
-var wordBank = ["stars", "moon", "mars", "venus", "jupiter", "nebula"];
+var wordBank = ["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","The Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Congo","Costa Rica","Cote d'Ivoire","Croatia", "Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","East Timor","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Fiji","Finland","France","Gabon","The Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kenya","North Korea","South Korea", "Kosovo","Kuwait","Laos","Latvia","Lebanon","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Macedonia","Norway","Oman","Pakistan","Palau","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Lucia","Samoa","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","Spain","Sri Lanka","Sudan","Sweden","Switzerland","Syria","Taiwan","Tanzania","Thailand","Togo","Tonga","Turkey","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Vatican City","Venezuela","Vietnam","Zambia","Zimbabwe"
+];
 
 // variable to store word in use
 var wordInUse = "";
@@ -10,11 +13,21 @@ var wins = 0;
 var losses = 0;
 
 
-// -for each word while in use,
-//     -pull out word store in inUse variable
-//      -split, then join with a <space>
-//      -replace all letters with _
+// Function to determine word in play
+    // Math.random to assign ,each a number
 
+ var pickWord = function() {
+     var pickNum = Math.floor(Math.random() * wordBank.length);
+     console.log(pickNum); 
+     wordInUse = wordBank[pickNum];
+     console.log(wordInUse);
+     return wordInUse;
+
+ }   
+ pickWord();
+
+ let myWord = new Word(wordInUse);
+var result = myWord.displayWord();
 // -Take in user input
 // -compare user input with letters in word
 
