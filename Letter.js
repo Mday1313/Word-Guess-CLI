@@ -16,13 +16,14 @@ var Letter = function (input) {
         } else {
             return this.letter;
         }
-
+    
     };
+    
     this.determineInWord = function (userGuess) {
         if (userGuess === this.letter) {
             this.hasBeenGuessed = true;
         }
-    }
+    };
 }
 
 // var input = "s";

@@ -13,18 +13,20 @@ var Word = function (answer) {
         var display = "";
         for (var i = 0; i < this.gameWord.length; i++) {
             display += this.gameWord[i] + " ";
+
+        
         }
         console.log();
         console.log(display);
     };
 
-    // this.guessWord = function (input) {
-    //     for (var i = 0; i < this.gameWord.length; i++) {
-    //         this.gameWord.determineInWord(input);
-    //         console.log(input + " is in word.");
-    //     }
+    this.guessInput = function (input) {
+        for (var i = 0; i < this.gameWord.length; i++) {
+            this.gameWord[i].determineInWord(input);
+            // console.log(input + " is in word.");
+        }
 
-    // };
+    };
 
 
 }
@@ -33,6 +35,4 @@ var Word = function (answer) {
 module.exports = Word;
 
 // let myWord = new Word("stars");
-// var result = myWord.guessWord("s");
-
-
+// myWord.guessInput("s");
