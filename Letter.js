@@ -19,6 +19,7 @@ var Letter = function (input) {
     
     };
     
+    
     this.determineInWord = function (userGuess) {
         if (userGuess === this.letter) {
             this.hasBeenGuessed = true;
