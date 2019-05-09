@@ -5,7 +5,7 @@ var Word = require("./Word");
 // To make it pretty!
 var chalk = require('chalk');
 // Words to play from, COUNTRY NAMES
-var wordBank = ["afghanistan", "albania", "algeria", "andorra", "angola", "antigua and barbuda", "argentina", "armenia", "australia", "austria", "azerbaijan", "bahamas", "bahrain", "bangladesh", "barbados", "belarus", "belgium", "belize", "benin", "bhutan", "bolivia", "bosnia and herzegovina", "botswana", "brazil", "bulgaria", "burkina faso", "burundi", "cabo verde", "cambodia", "cameroon", "canada", "central african republic", "chad", "chile", "china", "colombia", "congo", "costa Rica", "cote d'ivoire", "croatia", "cuba", "cyprus", "czech Republic", "denmark", "djibouti", "dominica", "dominican republic", "east timor", "ecuador", "egypt", "el salvador", "equatorial guinea", "eritrea", "estonia", "ethiopia", "fiji", "finland", "france", "gabon", "the gambia", "georgia", "germany", "ghana", "greece", "grenada", "guatemala", "guinea", "guyana", "haiti", "honduras", "hungary", "iceland", "india", "indonesia", "iran", "iraq", "ireland", "israel", "italy", "jamaica", "japan", "jordan", "kenya", "north korea", "south korea", "kosovo", "kuwait", "laos", "latvia", "lebanon", "liberia", "libya", "liechtenstein", "lithuania", "luxembourg", "madagascar", "malawi", "malaysia", "maldives", "mali", "mexico", "micronesia", "moldova", "monaco", "mongolia", "montenegro", "morocco", "mozambique", "myanmar", "namibia", "nepal", "netherlands", "new zealand", "nicaragua", "niger", "nigeria", "north macedonia", "norway", "oman", "pakistan", "palau", "panama", "papua new guinea", "paraguay", "Ppru", "philippines", "poland", "portugal", "qatar", "romania", "russia", "rwanda", "saint lucia", "samoa", "saudi arabia", "senegal", "serbia", "seychelles", "sierra leone", "singapore", "slovakia", "slovenia", "solomon islands", "somalia", "south africa", "spain", "sri lanka", "sudan", "sweden", "switzerland", "syria", "taiwan", "tanzania", "thailand", "togo", "tonga", "turkey", "uganda", "ukraine", "united arab emirates", "united kingdom", "united states", "uruguay", "vatican city", "venezuela", "vietnam", "zambia", "zimbabwe"];
+var wordBank = ["afghanistan", "albania", "algeria", "andorra", "angola", "antigua and barbuda", "argentina", "armenia", "australia", "austria", "azerbaijan", "bahamas", "bahrain", "bangladesh", "barbados", "belarus", "belgium", "belize", "benin", "bhutan", "bolivia", "bosnia and herzegovina", "botswana", "brazil", "bulgaria", "burkina faso", "burundi", "cabo verde", "cambodia", "cameroon", "canada", "central african republic", "chad", "chile", "china", "colombia", "congo", "costa rica", "cote d'ivoire", "croatia", "cuba", "cyprus", "czech Republic", "denmark", "djibouti", "dominica", "dominican republic", "east timor", "ecuador", "egypt", "el salvador", "equatorial guinea", "eritrea", "estonia", "ethiopia", "fiji", "finland", "france", "gabon", "the gambia", "georgia", "germany", "ghana", "greece", "grenada", "guatemala", "guinea", "guyana", "haiti", "honduras", "hungary", "iceland", "india", "indonesia", "iran", "iraq", "ireland", "israel", "italy", "jamaica", "japan", "jordan", "kenya", "north korea", "south korea", "kosovo", "kuwait", "laos", "latvia", "lebanon", "liberia", "libya", "liechtenstein", "lithuania", "luxembourg", "madagascar", "malawi", "malaysia", "maldives", "mali", "mexico", "micronesia", "moldova", "monaco", "mongolia", "montenegro", "morocco", "mozambique", "myanmar", "namibia", "nepal", "netherlands", "new zealand", "nicaragua", "niger", "nigeria", "north macedonia", "norway", "oman", "pakistan", "palau", "panama", "papua new guinea", "paraguay", "Ppru", "philippines", "poland", "portugal", "qatar", "romania", "russia", "rwanda", "saint lucia", "samoa", "saudi arabia", "senegal", "serbia", "seychelles", "sierra leone", "singapore", "slovakia", "slovenia", "solomon islands", "somalia", "south africa", "spain", "sri lanka", "sudan", "sweden", "switzerland", "syria", "taiwan", "tanzania", "thailand", "togo", "tonga", "turkey", "uganda", "ukraine", "united arab emirates", "united kingdom", "united states", "uruguay", "vatican city", "venezuela", "vietnam", "zambia", "zimbabwe"];
 
 // Allow for condition to pick new word if true
 var requireNewWord = false;
@@ -15,7 +15,7 @@ var incorrectLetters = [];
 var correctLetters = [];
 
 // Guesses left
-var guessesLeft = 10;
+var guessesLeft = 8;
 // WINS/Losses count
 var wins = 0;
 var losses = 0;
@@ -23,7 +23,7 @@ var losses = 0;
 var beginGame = function () {
   //Instructions to be displayed in beginning
   console.log("\n" + chalk.bold.green(" *** ") +chalk.bold.red(" *** ") +chalk.bold.blue(" *** ") +chalk.bold.yellow(" *** ") +chalk.bold.green("WORD GUESS GAME") + chalk.bold.yellow(" *** ") +chalk.bold.blue(" *** ") +chalk.bold.red(" *** ") +chalk.bold.green(" *** ")+"\n");
-  var text = chalk.magenta("How well do you know the world? \nGuess the letters to fill in the word.  \nAll words are names of countries.  \nYou will be allowed 8 wrong guesses per word.  \nGood luck!!")
+  var text = chalk.magenta("How well do you know the world? \nGuess the letters to fill in the word.  \nAll words are names of " + chalk.blue("countries") + ".  \nYou will be allowed 8 wrong guesses per word.  \nGood luck!!")
   console.log(text + "\n");
   // Use inqurirer to confirm begin game
   inquirer.prompt([
@@ -33,7 +33,7 @@ var beginGame = function () {
       message: 'Would you like to play the game?'
     }
   ]).then(answers => {
-    if (answers) {
+    if (answers.startGame === true) {
       // call main function that runs game
       getUserInput();
     } else {
@@ -110,15 +110,12 @@ function getUserInput() {
           myWord.gameWord.forEach(wordCheck);
           if (wordCheckArray.join("") === wordComplete.join("")) {
             console.log(chalk.red("\nWrong Guess!\n"));
-
             incorrectLetters.push(userGuess);
             guessesLeft--;
           } else {
             console.log(chalk.yellow.bold("\nCorrect!\n"));
-
             correctLetters.push(userGuess);
           }
-
           myWord.displayWord();
 
           // Print guesses left
@@ -144,7 +141,6 @@ function getUserInput() {
             wordCheckArray.push(key.hasBeenGuessed);
           }
         }
-        // }
       });
   } else {
     // Declare winner
@@ -168,19 +164,17 @@ function playAgain() {
         choices: ["Play Again", "Exit"],
         name: "restart"
       }
-    ])
-    .then(function (input) {
+    ]).then(function (input) {
       if (input.restart === "Play Again") {
         requireNewWord = true;
         incorrectLetters = [];
         correctLetters = [];
-        guessesLeft = 10;
+        guessesLeft = 8;
         getUserInput();
       } else {
-        console.log(chalk.blue.bold("\n    Wins: " + wins + "\n    Losses: " + losses))
+        console.log(chalk.blue.bold("\n    Wins: " + wins +"\n    Losses: " + losses ));
         return;
       }
     });
 }
-
 beginGame();

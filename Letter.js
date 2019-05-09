@@ -2,7 +2,8 @@
 var Letter = function (input) {
     this.letter = input;
     this.hasBeenGuessed = false;
-
+    
+    // current word will be fed in and converted to _ or space if has been guessed is true, if false display letter
     this.toString = function () {
         // console.log("I WORK");
         if (this.letter === " ") {
@@ -16,21 +17,13 @@ var Letter = function (input) {
         } else {
             return this.letter;
         }
-    
     };
-    
-    
+
     this.determineInWord = function (userGuess) {
         if (userGuess === this.letter) {
             this.hasBeenGuessed = true;
         }
     };
 }
-
-// var input = "s";
-// var test = new Letter("r")
-
-// var result = test.determineInWord();
-// console.log(result);
 
 module.exports = Letter;

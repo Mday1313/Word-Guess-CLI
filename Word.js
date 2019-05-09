@@ -3,7 +3,7 @@ var Letter = require("./Letter.js");
 
 var Word = function (answer) {
     this.gameWord = [];
-
+    // Loop through each letter in current word  
     for (var i = 0; i < answer.length; i++) {
         var newLetter = new Letter(answer[i]);
         this.gameWord.push(newLetter);
@@ -13,8 +13,6 @@ var Word = function (answer) {
         var display = "";
         for (var i = 0; i < this.gameWord.length; i++) {
             display += this.gameWord[i] + " ";
-
-        
         }
         console.log();
         console.log(display);
@@ -23,16 +21,8 @@ var Word = function (answer) {
     this.guessInput = function (input) {
         for (var i = 0; i < this.gameWord.length; i++) {
             this.gameWord[i].determineInWord(input);
-            // console.log(input + " is in word.");
         }
-
     };
-
-
 }
 
-
 module.exports = Word;
-
-// let myWord = new Word("stars");
-// myWord.guessInput("s");

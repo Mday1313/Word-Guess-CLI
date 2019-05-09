@@ -1,6 +1,18 @@
 # Word-Guess-CLI
 
----Pseudocoding---
+Objective
+
+How well do you know the world? 
+Guess the letters to fill in the word.  
+All words are names of countries.  
+You will be allowed 8 wrong guesses per word.  
+Good luck!!
+
+
+
+[Link for Video Walk Through](https://drive.google.com/file/d/1_mFMvAoR3s5pUd1v3Ks0HEKE6Rb30i8C/view)
+
+---Initial Pseudocoding---
 -create an array with words to guess
 
 -for each word while in use,
